@@ -1,0 +1,19 @@
+# Core (required) - Python 3.10
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+httpx>=0.27
+pandas>=2.0
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.3
+joblib>=1.3
+openpyxl>=3.1
+pytest>=8.0
+matplotlib
+yfinance>=0.2.40   # live prices, market caps and Yahoo headlines; without network access the app uses the committed snapshot (MARKET_LIVE=0 turns it off)
+
+# Optional (heavy: ~125 MB torch + 440 MB model download, ~25 min first run): FinBERT sentiment backend.
+# The pipeline falls back to the local TF-IDF model without it. Install only if you want FinBERT scores:
+# pip install torch --index-url https://download.pytorch.org/whl/cpu
+# pip install transformers
