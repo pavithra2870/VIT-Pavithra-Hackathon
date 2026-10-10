@@ -82,8 +82,13 @@ def load_reuters(n: int, seed: int) -> pd.DataFrame:
 
 
 def load_indian_news(n: int, seed: int) -> pd.DataFrame:
-    df = pd.read_csv(NEWS / "indian-finance-news.csv", usecols=["URL", "Summary", "Content"], engine="c")
-    df = df.dropna(subset=["Summary"]).sample(min(n, len(df)), random_state=seed)
+    # the 110 MB source file is too large for GitHub: the repo ships the exact 5,000-row sample this step draws from it
+    path = NEWS / "indian-finance-news.csv"
+    if not path.exists():
+        path = NEWS / "indian-finance-news-sample.csv"
+    df = pd.read_csv(path, usecols=["URL", "Summary"], engine="c").dropna(subset=["Summary"])
+    if len(df) > n:                       # the shipped sample is already n rows: keep its order, do not reshuffle
+        df = df.sample(n, random_state=seed)
     df["text"] = df["Summary"].map(clean_text).str.slice(0, 700)
     df["title"] = df["text"].str.split(r"(?<=[.!?]) ", n=1, regex=True).str[0].str.slice(0, 160)
     df["url"] = df["URL"]
@@ -170,6 +175,8 @@ def load_gdelt(seed: int) -> pd.DataFrame:
     cfg = engine_config()["ingestion"]
     frames = [_prepare_gdelt(_read_gdelt(p, GDELT_COLS), cfg["gdelt_min_articles"], cfg["gdelt_keep_per_day"])
               for p in sorted(glob.glob(str(RAW_GDELT / "*.export.CSV")))]
+    if not frames:                        # no GDELT files yet (the refresh job downloads them): nothing to return
+        return pd.DataFrame(columns=COLUMNS)
     daily = pd.concat(frames, ignore_index=True).sort_values("num_articles", ascending=False).drop_duplicates("url")
     daily["replay_ts"] = pd.to_datetime(daily["date_added"], format="%Y%m%d", errors="coerce") + pd.to_timedelta(
         np.random.default_rng(seed).integers(0, 86400, len(daily)), unit="s")
@@ -206,15 +213,25 @@ def load_all(seed: int | None = None) -> pd.DataFrame:
     """Load + clean + de-duplicate every source into the common document schema."""
     cfg = engine_config()["ingestion"]
     seed = cfg["random_seed"] if seed is None else seed
-    parts = [
-        load_gdelt(seed),
-        load_reuters(cfg["news_sample"]["reuters"], seed),
-        load_indian_news(cfg["news_sample"]["indian"], seed),
-        load_financial_phrasebank(cfg["news_sample"]["financial_phrasebank"], seed),
-        load_yfinance_news(),
-        load_financial_tweets(cfg["social_sample"]["financial_tweets"], seed),
-        load_twitter_general(cfg["social_sample"]["twitter_modi"], seed),
+    sources = [
+        ("GDELT events", lambda: load_gdelt(seed)),
+        ("Reuters", lambda: load_reuters(cfg["news_sample"]["reuters"], seed)),
+        ("Indian finance news", lambda: load_indian_news(cfg["news_sample"]["indian"], seed)),
+        ("FinancialPhraseBank", lambda: load_financial_phrasebank(cfg["news_sample"]["financial_phrasebank"], seed)),
+        ("Yahoo Finance headlines", load_yfinance_news),
+        ("Financial tweets", lambda: load_financial_tweets(cfg["social_sample"]["financial_tweets"], seed)),
+        ("Twitter general", lambda: load_twitter_general(cfg["social_sample"]["twitter_modi"], seed)),
     ]
+    parts = []
+    for name, fn in sources:              # a missing optional source is skipped with a warning, never fatal
+        try:
+            part = fn()
+            if len(part):
+                parts.append(part)
+        except (FileNotFoundError, ValueError) as exc:
+            print(f"WARNING: skipping source '{name}': {type(exc).__name__}: {exc}")
+    if not parts:
+        raise RuntimeError("No source data found under /data - nothing to process")
     df = pd.concat(parts, ignore_index=True)
     df = df[df["text"].str.len() >= 15]
     df = deduplicate(df, "text")

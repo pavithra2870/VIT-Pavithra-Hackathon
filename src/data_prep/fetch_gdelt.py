@@ -20,6 +20,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from src.config import LIVE_GDELT, RAW_GDELT
 
+MAX_CATCHUP_DAYS = 10
 BASE = "https://data.gdeltproject.org/events/{d}.export.CSV.zip"
 BASE_V2 = "https://data.gdeltproject.org/gdeltv2/{ts}.export.CSV.zip"   # GDELT 2.0: one file every 15 minutes
 
@@ -53,7 +54,8 @@ def fetch_day(day: dt.date, timeout: float = 180.0) -> str:
 def fetch_missing(start: dt.date | None = None, end: dt.date | None = None) -> dict:
     have = local_dates()
     today = dt.datetime.now(dt.timezone.utc).date()
-    start = start or ((have[-1] + dt.timedelta(days=1)) if have else today - dt.timedelta(days=9))
+    earliest = today - dt.timedelta(days=MAX_CATCHUP_DAYS)   # bound the catch-up: a clone run months later must not start hundreds of downloads
+    start = start or max((have[-1] + dt.timedelta(days=1)) if have else earliest, earliest)
     end = end or today
     got: list[str] = []
     pending: list[str] = []

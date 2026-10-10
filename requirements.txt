@@ -6,7 +6,7 @@ httpx>=0.27
 pandas>=2.0
 numpy>=1.24
 scipy>=1.10
-scikit-learn>=1.3
+scikit-learn==1.7.2   # pinned: data/processed/models/sentiment_tfidf_lr.joblib is a pickle and must be loaded by the version that wrote it
 joblib>=1.3
 openpyxl>=3.1
 pytest>=8.0
