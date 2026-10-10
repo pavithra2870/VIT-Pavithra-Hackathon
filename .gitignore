@@ -1,0 +1,14 @@
+venv/
+node_modules/
+__pycache__/
+*.pyc
+src/frontend/dist/
+.pytest_cache/
+
+# transient or regenerable data
+~$*
+src/data_prep/make_architecture.py
+src/data_prep/make_deck.py
+# over GitHub's 100 MB file limit: the committed indian-finance-news-sample.csv is used instead
+data/news/indian-finance-news.csv
+docs/presentation.pptx
