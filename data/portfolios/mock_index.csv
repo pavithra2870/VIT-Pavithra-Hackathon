@@ -1,0 +1,16 @@
+ticker,name,sector,weight
+AAPL,Apple Inc.,Information Technology,0.11221711221711221
+MSFT,Microsoft Corp.,Information Technology,0.10186910186910186
+NVDA,Nvidia Corp.,Information Technology,0.12000012000011999
+GOOGL,Alphabet Inc.,Communication Services,0.08781408781408781
+AMZN,Amazon.com Inc.,Consumer Discretionary,0.09873209873209872
+TSLA,Tesla Inc.,Consumer Discretionary,0.12000012000011999
+JPM,JPMorgan Chase,Financials,0.051061051061051056
+BAC,Bank of America,Financials,0.04328104328104328
+XOM,Exxon Mobil,Energy,0.04245904245904245
+CVX,Chevron Corp.,Energy,0.03662303662303662
+JNJ,Johnson & Johnson,Health Care,0.03901503901503901
+PFE,Pfizer Inc.,Health Care,0.03585503585503585
+PG,Procter & Gamble,Consumer Staples,0.03635103635103635
+BA,Boeing Co.,Industrials,0.040556040556040555
+CAT,Caterpillar Inc.,Industrials,0.034166034166034163

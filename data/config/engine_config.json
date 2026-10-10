@@ -1,0 +1,36 @@
+{
+  "_doc": "Risk-scoring, aggregation and rebalancing parameters. Every number here is an explicit, documented assumption (see design.md).",
+  "scoring": {
+    "weights": {"severity": 0.25, "sentiment_magnitude": 0.10, "confidence": 0.10, "entity_relevance": 0.20, "source_consensus": 0.15, "market_volatility": 0.10, "novelty": 0.10},
+    "impact_curve": {"min": 1.0, "max": 10.0, "exponent": 1.3, "raw_floor": 0.30, "raw_ceiling": 0.78},
+    "high_impact_threshold": 7.0,
+    "novelty_half_life_days": 3.0
+  },
+  "sentiment": {
+    "ensemble_weights": {"model": 0.55, "lexicon": 0.25, "source_prior": 0.20},
+    "gdelt_tone_scale": 10.0
+  },
+  "ingestion": {
+    "gdelt_min_articles": 3,
+    "gdelt_keep_per_day": 2500,
+    "gdelt_live_min_articles": 1,
+    "gdelt_live_keep_per_day": 1500,
+    "gdelt_root_codes": ["06", "07", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
+    "news_sample": {"reuters": 1000, "indian": 5000, "financial_phrasebank": 4800},
+    "social_sample": {"financial_tweets": 6000, "twitter_modi": 2500},
+    "replay_days": 9,
+    "replay_start": "2026-09-27",
+    "random_seed": 42
+  },
+  "rebalancer": {
+    "min_weight": 0.01,
+    "max_weight": 0.15,
+    "max_turnover": 0.10,
+    "max_sector_weight": 0.40,
+    "tilt_strength": 0.60,
+    "loss_aversion": 1.4,
+    "volatility_dampening": 0.5,
+    "signal_half_life_days": 2.0,
+    "lookback_days": 5
+  }
+}

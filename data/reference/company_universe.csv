@@ -1,0 +1,104 @@
+ticker|name|sector|country|aliases
+AAPL|Apple Inc.|Information Technology|US|Apple
+MSFT|Microsoft Corp.|Information Technology|US|Microsoft
+NVDA|Nvidia Corp.|Information Technology|US|Nvidia
+AVGO|Broadcom Inc.|Information Technology|US|Broadcom
+ORCL|Oracle Corp.|Information Technology|US|Oracle
+CRM|Salesforce Inc.|Information Technology|US|Salesforce
+ADBE|Adobe Inc.|Information Technology|US|Adobe
+AMD|Advanced Micro Devices|Information Technology|US|Advanced Micro Devices
+INTC|Intel Corp.|Information Technology|US|Intel
+CSCO|Cisco Systems|Information Technology|US|Cisco
+IBM|IBM|Information Technology|US|IBM|International Business Machines
+QCOM|Qualcomm Inc.|Information Technology|US|Qualcomm
+TXN|Texas Instruments|Information Technology|US|Texas Instruments
+GOOGL|Alphabet Inc.|Communication Services|US|Alphabet|Google
+META|Meta Platforms|Communication Services|US|Meta Platforms|Facebook
+NFLX|Netflix Inc.|Communication Services|US|Netflix
+DIS|Walt Disney Co.|Communication Services|US|Disney|Walt Disney
+T|AT&T Inc.|Communication Services|US|AT&T
+VZ|Verizon Communications|Communication Services|US|Verizon
+CMCSA|Comcast Corp.|Communication Services|US|Comcast
+TMUS|T-Mobile US|Communication Services|US|T-Mobile
+AMZN|Amazon.com Inc.|Consumer Discretionary|US|Amazon
+TSLA|Tesla Inc.|Consumer Discretionary|US|Tesla
+HD|Home Depot|Consumer Discretionary|US|Home Depot
+MCD|McDonald's Corp.|Consumer Discretionary|US|McDonald's|McDonalds
+NKE|Nike Inc.|Consumer Discretionary|US|Nike
+SBUX|Starbucks Corp.|Consumer Discretionary|US|Starbucks
+LOW|Lowe's Cos.|Consumer Discretionary|US|Lowe's
+GM|General Motors|Consumer Discretionary|US|General Motors
+F|Ford Motor Co.|Consumer Discretionary|US|Ford Motor|Ford
+BKNG|Booking Holdings|Consumer Discretionary|US|Booking Holdings
+WMT|Walmart Inc.|Consumer Staples|US|Walmart|Wal-Mart
+PG|Procter & Gamble|Consumer Staples|US|Procter & Gamble|Procter and Gamble
+KO|Coca-Cola Co.|Consumer Staples|US|Coca-Cola|Coca Cola
+PEP|PepsiCo Inc.|Consumer Staples|US|PepsiCo|Pepsi
+COST|Costco Wholesale|Consumer Staples|US|Costco
+MDLZ|Mondelez International|Consumer Staples|US|Mondelez
+PM|Philip Morris International|Consumer Staples|US|Philip Morris
+MO|Altria Group|Consumer Staples|US|Altria
+CL|Colgate-Palmolive|Consumer Staples|US|Colgate
+JNJ|Johnson & Johnson|Health Care|US|Johnson & Johnson|Johnson and Johnson
+UNH|UnitedHealth Group|Health Care|US|UnitedHealth
+LLY|Eli Lilly|Health Care|US|Eli Lilly|Lilly
+PFE|Pfizer Inc.|Health Care|US|Pfizer
+MRK|Merck & Co.|Health Care|US|Merck
+ABBV|AbbVie Inc.|Health Care|US|AbbVie
+TMO|Thermo Fisher Scientific|Health Care|US|Thermo Fisher
+ABT|Abbott Laboratories|Health Care|US|Abbott Laboratories|Abbott
+BMY|Bristol-Myers Squibb|Health Care|US|Bristol-Myers|Bristol Myers
+AMGN|Amgen Inc.|Health Care|US|Amgen
+GILD|Gilead Sciences|Health Care|US|Gilead
+MDT|Medtronic plc|Health Care|US|Medtronic
+CVS|CVS Health|Health Care|US|CVS Health|CVS
+JPM|JPMorgan Chase|Financials|US|JPMorgan|J.P. Morgan|JP Morgan
+BAC|Bank of America|Financials|US|Bank of America|BofA
+WFC|Wells Fargo|Financials|US|Wells Fargo
+C|Citigroup Inc.|Financials|US|Citigroup|Citibank
+GS|Goldman Sachs|Financials|US|Goldman Sachs|Goldman
+MS|Morgan Stanley|Financials|US|Morgan Stanley
+BLK|BlackRock Inc.|Financials|US|BlackRock
+AXP|American Express|Financials|US|American Express
+V|Visa Inc.|Financials|US|Visa Inc
+MA|Mastercard Inc.|Financials|US|Mastercard
+BRK-B|Berkshire Hathaway|Financials|US|Berkshire Hathaway|Berkshire
+USB|U.S. Bancorp|Financials|US|U.S. Bancorp|US Bancorp
+SCHW|Charles Schwab|Financials|US|Charles Schwab|Schwab
+AIG|American International Group|Financials|US|American International Group|AIG
+MET|MetLife Inc.|Financials|US|MetLife
+BA|Boeing Co.|Industrials|US|Boeing
+CAT|Caterpillar Inc.|Industrials|US|Caterpillar
+GE|GE Aerospace|Industrials|US|General Electric|GE Aerospace
+HON|Honeywell International|Industrials|US|Honeywell
+UPS|United Parcel Service|Industrials|US|United Parcel Service|UPS
+LMT|Lockheed Martin|Industrials|US|Lockheed Martin|Lockheed
+RTX|RTX Corp.|Industrials|US|RTX|Raytheon
+DE|Deere & Co.|Industrials|US|Deere
+UNP|Union Pacific|Industrials|US|Union Pacific
+FDX|FedEx Corp.|Industrials|US|FedEx
+MMM|3M Co.|Industrials|US|3M
+XOM|Exxon Mobil|Energy|US|Exxon Mobil|Exxon|ExxonMobil
+CVX|Chevron Corp.|Energy|US|Chevron
+COP|ConocoPhillips|Energy|US|ConocoPhillips
+SLB|Schlumberger|Energy|US|Schlumberger|SLB
+OXY|Occidental Petroleum|Energy|US|Occidental Petroleum|Occidental
+NEE|NextEra Energy|Utilities|US|NextEra
+DUK|Duke Energy|Utilities|US|Duke Energy
+SO|Southern Co.|Utilities|US|Southern Company
+LIN|Linde plc|Materials|US|Linde
+DOW|Dow Inc.|Materials|US|Dow Chemical|Dow Inc
+AMT|American Tower|Real Estate|US|American Tower
+PLD|Prologis Inc.|Real Estate|US|Prologis
+RELIANCE.NS|Reliance Industries|Energy|IN|Reliance Industries|Reliance
+TCS.NS|Tata Consultancy Services|Information Technology|IN|Tata Consultancy|TCS
+INFY.NS|Infosys Ltd.|Information Technology|IN|Infosys
+WIPRO.NS|Wipro Ltd.|Information Technology|IN|Wipro
+HDFCBANK.NS|HDFC Bank|Financials|IN|HDFC Bank
+ICICIBANK.NS|ICICI Bank|Financials|IN|ICICI Bank
+SBIN.NS|State Bank of India|Financials|IN|State Bank of India|SBI
+TATAMOTORS.NS|Tata Motors|Consumer Discretionary|IN|Tata Motors
+ADANIENT.NS|Adani Enterprises|Industrials|IN|Adani
+BHARTIARTL.NS|Bharti Airtel|Communication Services|IN|Bharti Airtel|Airtel
+LT.NS|Larsen & Toubro|Industrials|IN|Larsen & Toubro|L&T
+ITC.NS|ITC Ltd.|Consumer Staples|IN|ITC Ltd

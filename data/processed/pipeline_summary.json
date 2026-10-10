@@ -1,0 +1,25 @@
+{
+  "documents": 50147,
+  "signals": 5335,
+  "high_impact_signals": 20,
+  "impact_quantiles": {
+    "0.5": 3.25,
+    "0.9": 5.16,
+    "0.99": 6.53
+  },
+  "sentiment_backend": "finbert",
+  "event_types": {
+    "GEOPOLITICAL": 1686,
+    "MACROECONOMIC": 1056,
+    "REGULATORY": 812,
+    "NATURAL_DISASTER": 338,
+    "COMMODITY_ENERGY": 288,
+    "PRODUCT_LAUNCH": 272,
+    "OTHER": 193,
+    "MERGER_ACQUISITION": 191,
+    "EARNINGS": 183,
+    "CYBER_OPERATIONAL": 163,
+    "CREDIT_EVENT": 84,
+    "INTEREST_RATE": 69
+  }
+}

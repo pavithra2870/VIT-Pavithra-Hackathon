@@ -1,0 +1,61 @@
+{
+  "_doc": "Event taxonomy for the Risk Engine. base_severity (0-1) is the prior market-impact severity of the class; keywords are weighted regex fragments (case-insensitive) used by the deterministic classifier. cameo_map maps GDELT CAMEO root codes to event types.",
+  "event_types": {
+    "GEOPOLITICAL": {"label": "Geopolitical", "base_severity": 0.80, "keywords": {
+      "\\bwar\\b": 2.0, "invasion": 2.5, "airstrike|air strike|missile|drone strike": 2.5, "military|troops|\\barmy\\b": 1.2, "sanction": 2.0, "ceasefire|cease-fire": 1.5,
+      "conflict": 1.5, "terror|\\battack|bombing|shelling|killed": 1.5, "tensions?\\b": 1.2, "embargo": 2.0, "\\bcoup\\b": 2.5, "nuclear": 2.0,
+      "border": 1.0, "protest|unrest|\\briot": 1.2, "geopolitic": 2.5, "tariff|trade war": 1.5, "\biran\b|israel|russia|putin|zelensky|beijing|north korea|red sea|hormuz|houthi|\byemen\b|\bsyria\b|kremlin|\\bnato\\b|hamas|hezbollah|gaza|ukrain|taiwan strait|south china sea": 1.8, "diplomat": 0.8, "hostage": 1.5, "strikes? on\\b": 1.0}},
+    "MACROECONOMIC": {"label": "Macroeconomic", "base_severity": 0.60, "keywords": {
+      "\\bgdp\\b": 2.0, "inflation|\\bcpi\\b|consumer prices": 2.0, "unemployment|jobless|payrolls|labou?r market": 2.0, "recession": 2.5, "economy|economic": 1.0,
+      "consumer spending|retail sales": 1.8, "trade deficit|current account|\\bexports?\\b|\\bimports?\\b": 1.2, "fiscal|budget|stimulus|deficit": 1.5, "slowdown|contraction|growth forecast": 1.8,
+      "lockdown": 1.8, "\\bpmi\\b|manufacturing output|industrial production": 1.8, "currency|rupee|devaluation|exchange rate": 1.4, "economic cooperation|trade deal|trade agreement|aid package": 1.5}},
+    "INTEREST_RATE": {"label": "Interest Rate / Monetary Policy", "base_severity": 0.65, "keywords": {
+      "interest rates?": 2.5, "rate (cut|hike|rise|increase|decision)": 3.0, "federal reserve|the fed\\b|fomc|powell": 2.5, "central bank": 2.0, "\\becb\\b|\\bboe\\b|bank of england|bank of japan|\\brbi\\b|reserve bank": 2.0,
+      "monetary policy": 2.5, "treasury yields?|bond yields?|yield curve": 2.2, "basis points?|\\bbps\\b": 1.5, "quantitative (easing|tightening)": 2.5, "repo rate|policy rate|benchmark rate": 2.5}},
+    "REGULATORY": {"label": "Regulatory / Legal", "base_severity": 0.55, "keywords": {
+      "regulat": 2.0, "\\bsec\\b|securities and exchange commission": 1.8, "lawsuit|\\bsued\\b|litigation|\\bcourt\\b|\\bjudge\\b|ruling": 1.6, "antitrust|competition commission|monopoly": 2.5,
+      "\\bfine[sd]?\\b|penalt": 1.8, "investigat|\\bprobe\\b|subpoena|inquiry": 1.8, "\\bbans?\\b|\\bbanned\\b|crackdown": 1.8, "compliance|\\bsebi\\b|fda approv|recall": 1.6, "legislation|bill passed|\\blaw\\b|new rules?": 1.2, "settlement|\\bsettle[sd]?\\b": 1.4, "fraud|indict|charged": 2.0}},
+    "CREDIT_EVENT": {"label": "Credit Event", "base_severity": 0.75, "keywords": {
+      "\\bdefault(ed|s)?\\b": 3.0, "bankrupt|chapter 11|insolven": 3.0, "downgrad": 2.5, "credit rating|moody|fitch|s&p global ratings": 1.8, "bad loans?|\\bnpas?\\b|non-performing": 2.5, "write-?offs?|write-?downs?|impairment": 2.0,
+      "debt (crisis|restructur)|restructur": 1.8, "credit spreads?|credit crunch|liquidity crunch": 2.2, "bank run|bailout|rescue package|rescue deal": 2.5, "covenant|distressed|\\bjunk\\b": 1.8, "loan (losses|loss)": 2.2}},
+    "MERGER_ACQUISITION": {"label": "Merger / Acquisition", "base_severity": 0.45, "keywords": {
+      "acqui(re|res|red|sition)": 2.5, "merger|\\bmerge[sd]?\\b": 2.5, "takeover|buyout|bid for|tender offer": 2.5, "to buy\\b|agrees to be bought|to be bought": 2.0, "stake (sale|purchase)|divest|spin-?off": 1.8, "joint venture|alliance": 1.2, "deal (worth|valued)": 1.5}},
+    "EARNINGS": {"label": "Earnings / Guidance", "base_severity": 0.40, "keywords": {
+      "earnings": 2.5, "quarterly (profit|results|revenue)|net (profit|income|loss|sales)": 2.2, "\\bprofits?\\b|revenue": 1.4, "guidance|outlook|forecast": 1.5, "beats? (estimates|expectations)|miss(es|ed)? (estimates|expectations)": 2.5,
+      "dividend": 1.5, "operating (profit|income)|ebitda|\\beps\\b": 2.0, "shares? (fall|rise|jump|slump|surge|tumble)": 1.4, "upgrade[sd]?\\b|price target": 1.4, "buyback|share repurchase": 1.3}},
+    "PRODUCT_LAUNCH": {"label": "Product Launch / Innovation", "base_severity": 0.25, "keywords": {
+      "\\blaunch(es|ed)?\\b": 2.5, "unveil|\\bintroduc(e|es|ed)\\b": 2.0, "new (product|model|device|service|platform)": 2.0, "\\breleases?d?\\b": 1.2, "partnership|collaborat": 1.2, "patent|breakthrough|innovation": 1.5, "rolls? out|rollout": 1.5, "\\bai\\b|artificial intelligence|\\bchips?\\b": 1.0}},
+    "COMMODITY_ENERGY": {"label": "Commodity / Energy", "base_severity": 0.60, "keywords": {
+      "\\boil\\b|crude|brent|\\bwti\\b": 2.5, "\\bopec\\b": 2.5, "natural gas|\\blng\\b|pipeline": 2.0, "\\bgold\\b|silver|copper|\\bsteel\\b|aluminium|aluminum": 1.5, "commodit": 2.0, "\\bfuel\\b|gasoline|diesel": 1.5, "energy (prices|crisis|supply)": 2.2, "wheat|\\bgrain\\b|food prices|fertili[sz]er": 1.5, "refiner|drilling|\\bshale\\b": 1.5}},
+    "CYBER_OPERATIONAL": {"label": "Cyber / Operational", "base_severity": 0.55, "keywords": {
+      "cyber ?attack|ransomware|data breach|\\bhack(ed|ers?)?\\b": 3.0, "outage|disruption|shutdown": 2.0, "supply chain": 1.8, "strike (by|at)|walkout|labou?r dispute": 1.8, "plant (closure|fire|explosion)": 2.0, "layoffs?|job cuts|cut(s)? (\\d|jobs|staff)": 1.6, "\\bcrash(ed)?\\b|accident": 1.4}},
+    "NATURAL_DISASTER": {"label": "Natural Disaster / Health", "base_severity": 0.65, "keywords": {
+      "earthquake|tsunami|hurricane|typhoon|cyclone|flood|wildfire|drought": 3.0, "pandemic|outbreak|epidemic|\\bvirus\\b|covid|coronavirus": 2.5, "disaster": 2.0, "heatwave|\\bstorm\\b": 1.5}},
+    "OTHER": {"label": "Other / General", "base_severity": 0.15, "keywords": {}}
+  },
+  "cameo_map": {
+    "06": "MACROECONOMIC", "07": "MACROECONOMIC", "09": "REGULATORY", "10": "GEOPOLITICAL", "11": "GEOPOLITICAL", "12": "GEOPOLITICAL",
+    "13": "GEOPOLITICAL", "14": "GEOPOLITICAL", "15": "GEOPOLITICAL", "16": "GEOPOLITICAL", "17": "GEOPOLITICAL", "18": "GEOPOLITICAL", "19": "GEOPOLITICAL", "20": "GEOPOLITICAL"
+  },
+  "cameo_root_labels": {
+    "06": "material cooperation", "07": "aid", "09": "investigation", "10": "demand", "11": "disapproval", "12": "rejection", "13": "threat",
+    "14": "protest", "15": "military posture", "16": "reduced relations / sanctions", "17": "coercion", "18": "assault", "19": "armed conflict", "20": "mass violence"
+  },
+  "sector_keywords": {
+    "Energy": "\\boil\\b|crude|opec|natural gas|\\blng\\b|refiner|drilling|petroleum|\\benergy\\b",
+    "Financials": "\\bbanks?\\b|lender|lending|insurer|insurance|brokerage|\\bcredit\\b|mortgage|fintech|payments",
+    "Information Technology": "\\bchips?\\b|semiconductor|software|\\bcloud\\b|data cent|cyber|\\bai\\b|artificial intelligence|\\btech\\b|computing",
+    "Health Care": "pharma|\\bdrugs?\\b|\\bfda\\b|vaccine|hospital|biotech|medical|health",
+    "Industrials": "airline|aircraft|aerospace|defen[cs]e|railway|shipping|logistics|freight|infrastructure|manufactur",
+    "Consumer Discretionary": "retail|automaker|electric vehicle|\\bev\\b|car sales|travel|hotel|apparel|e-commerce",
+    "Consumer Staples": "grocery|\\bfood\\b|beverage|tobacco|household",
+    "Utilities": "utility|utilities|power grid|electricity|renewable",
+    "Materials": "mining|\\bsteel\\b|chemical|copper|aluminium|aluminum|fertili[sz]er|\\bgold\\b",
+    "Real Estate": "real estate|property|\\breits?\\b|housing",
+    "Communication Services": "telecom|\\bmedia\\b|streaming|broadcast|social media|\\b5g\\b"
+  },
+  "risk_lexicon": {
+    "negative": ["war","attack","killed","crisis","default","bankruptcy","recession","fraud","plunge","collapse","slump","tumble","losses","loss","cut","layoffs","downgrade","sanction","probe","lawsuit","fine","fear","risk","warning","warns","threat","tension","crash","decline","drop","falls","fall","weak","weakness","shutdown","outage","breach","hack","delay","shortage","inflation","deficit","plummet","slide","slides","bearish","miss","misses","disaster","strike","unrest","conflict","bomb","missile","dead","injured","wounded","violence","ban"],
+    "positive": ["growth","profit","beat","beats","surge","rally","record","gain","gains","rise","rises","jump","jumps","upgrade","boost","strong","expands","expansion","approval","approved","wins","win","launch","partnership","deal","recovery","rebound","bullish","outperform","raises","raised","dividend","soar","soars","improve","improves","ceasefire","agreement","stimulus","peace","aid","cooperation"]
+  }
+}

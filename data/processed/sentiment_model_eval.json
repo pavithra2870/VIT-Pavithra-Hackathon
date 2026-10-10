@@ -1,0 +1,31 @@
+{
+  "backend": "tfidf-lr",
+  "train_rows": 42349,
+  "heldout_rows": 8588,
+  "heldout_accuracy": 0.7412,
+  "heldout_macro_f1": 0.7318,
+  "per_source": {
+    "fin_tweets": {
+      "n": 7618,
+      "accuracy": 0.7464,
+      "macro_f1": 0.728
+    },
+    "fpb": {
+      "n": 970,
+      "accuracy": 0.7,
+      "macro_f1": 0.6221
+    }
+  },
+  "classes": [
+    -1,
+    0,
+    1
+  ],
+  "lexicon_only_heldout_accuracy": 0.2916,
+  "finbert": {
+    "heldout_rows": 1970,
+    "heldout_accuracy": 0.5604,
+    "heldout_macro_f1": 0.535,
+    "note": "FinBERT is zero-shot here (not fine-tuned); FinancialPhraseBank is the FPB test split + a tweet sample; decision thresholds +-0.25"
+  }
+}

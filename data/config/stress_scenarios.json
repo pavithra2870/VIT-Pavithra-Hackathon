@@ -1,0 +1,120 @@
+{
+  "_doc": "Explicit event-type -> shock assumptions for the Strategic Stress Lab. All shocks are specified AT IMPACT SCORE 10 and scaled linearly by (impact/10)^severity_exponent. SIMPLIFIED PROTOTYPE METHODOLOGY - not a production or regulatory (CCAR/EBA) model. Equity shocks are fractional price moves; rates are parallel yield shifts in bp; spreads are bp widening by rating bucket; PD multipliers scale base default probability; vol_shock is additive implied-vol points.",
+  "global": {
+    "severity_exponent": 1.0,
+    "direct_exposure_multiplier": 1.5,
+    "bond_convexity_term": true,
+    "loan": {"floating_pd_uplift_per_100bp": 0.20, "spread_beta": 0.5},
+    "min_impact_to_trigger": 7.0
+  },
+  "events": {
+    "GEOPOLITICAL": {
+      "label": "Geopolitical shock", "scope": "broad", "direction_from_sentiment": false,
+      "description": "Risk-off repricing: equities sell off (energy and defence cushion), sovereign yields fall on flight-to-quality while credit spreads widen, borrower defaults rise in cyclical sectors and implied volatility spikes.",
+      "equity": {"default": -0.10, "sector": {"Energy": 0.04, "Industrials": -0.06, "Information Technology": -0.12, "Consumer Discretionary": -0.13, "Financials": -0.12, "Communication Services": -0.10, "Health Care": -0.05, "Consumer Staples": -0.04, "Utilities": -0.03, "Materials": -0.08, "Real Estate": -0.09}},
+      "rates": {"parallel_bp": -25},
+      "spreads_bp": {"IG": 60, "HY": 220},
+      "loans": {"pd_multiplier": 1.8, "sector_pd_multiplier": {"Energy": 1.2, "Consumer Discretionary": 2.2, "Industrials": 2.0, "Financials": 1.6, "Real Estate": 2.0}},
+      "derivatives": {"vol_shock": 0.12}
+    },
+    "MACROECONOMIC": {
+      "label": "Macroeconomic slowdown", "scope": "broad", "direction_from_sentiment": false,
+      "description": "Growth scare: cyclical equities derate, yields drift lower, spreads widen modestly and loan delinquencies increase.",
+      "equity": {"default": -0.08, "sector": {"Consumer Discretionary": -0.12, "Industrials": -0.11, "Financials": -0.10, "Materials": -0.10, "Energy": -0.09, "Information Technology": -0.09, "Real Estate": -0.08, "Consumer Staples": -0.03, "Health Care": -0.03, "Utilities": -0.02, "Communication Services": -0.07}},
+      "rates": {"parallel_bp": -30},
+      "spreads_bp": {"IG": 45, "HY": 180},
+      "loans": {"pd_multiplier": 1.7, "sector_pd_multiplier": {"Consumer Discretionary": 2.0, "Industrials": 1.9, "Real Estate": 1.9}},
+      "derivatives": {"vol_shock": 0.08}
+    },
+    "INTEREST_RATE": {
+      "label": "Interest-rate shock (+200bp)", "scope": "broad", "direction_from_sentiment": false,
+      "description": "Parallel upward rate shift: duration-based bond losses, floating-rate borrowers face debt-service stress, long-duration equities and rate-sensitive sectors derate, payer swaps gain.",
+      "equity": {"default": -0.07, "sector": {"Real Estate": -0.16, "Utilities": -0.12, "Information Technology": -0.12, "Consumer Discretionary": -0.09, "Communication Services": -0.08, "Financials": 0.01, "Energy": -0.02, "Health Care": -0.05, "Consumer Staples": -0.05, "Industrials": -0.06, "Materials": -0.05}},
+      "rates": {"parallel_bp": 200},
+      "spreads_bp": {"IG": 25, "HY": 90},
+      "loans": {"pd_multiplier": 1.5, "sector_pd_multiplier": {"Real Estate": 2.2, "Utilities": 1.4, "Consumer Discretionary": 1.7}},
+      "derivatives": {"vol_shock": 0.06}
+    },
+    "REGULATORY": {
+      "label": "Regulatory action", "scope": "targeted", "direction_from_sentiment": true,
+      "description": "Targeted valuation shock for named companies and their sector peers; limited broad-market and credit contagion.",
+      "equity": {"default": -0.015, "sector": {"Information Technology": -0.05, "Communication Services": -0.05, "Financials": -0.05, "Health Care": -0.04, "Energy": -0.04}, "named_entity_shock": -0.18},
+      "rates": {"parallel_bp": 0},
+      "spreads_bp": {"IG": 8, "HY": 30},
+      "loans": {"pd_multiplier": 1.1, "sector_pd_multiplier": {}},
+      "derivatives": {"vol_shock": 0.04}
+    },
+    "CREDIT_EVENT": {
+      "label": "Credit event / contagion", "scope": "broad", "direction_from_sentiment": false,
+      "description": "Credit-spread blow-out and default wave: loans and bonds take the primary hit, bank equities sell off, CDS protection gains value.",
+      "equity": {"default": -0.07, "sector": {"Financials": -0.16, "Real Estate": -0.12, "Consumer Discretionary": -0.09, "Industrials": -0.08, "Energy": -0.07, "Information Technology": -0.06, "Health Care": -0.03, "Consumer Staples": -0.03, "Utilities": -0.04, "Materials": -0.07, "Communication Services": -0.06}, "named_entity_shock": -0.30},
+      "rates": {"parallel_bp": -15},
+      "spreads_bp": {"IG": 110, "HY": 400},
+      "loans": {"pd_multiplier": 2.8, "sector_pd_multiplier": {"Financials": 3.2, "Real Estate": 3.4, "Consumer Discretionary": 3.0}},
+      "derivatives": {"vol_shock": 0.14}
+    },
+    "MERGER_ACQUISITION": {
+      "label": "Merger / acquisition", "scope": "targeted", "direction_from_sentiment": true,
+      "description": "Event-driven repricing of named companies (target premium / acquirer discount); negligible market-wide effect.",
+      "equity": {"default": 0.0, "sector": {}, "named_entity_shock": 0.12},
+      "rates": {"parallel_bp": 0},
+      "spreads_bp": {"IG": 5, "HY": 15},
+      "loans": {"pd_multiplier": 1.0, "sector_pd_multiplier": {}},
+      "derivatives": {"vol_shock": 0.03}
+    },
+    "EARNINGS": {
+      "label": "Earnings surprise", "scope": "targeted", "direction_from_sentiment": true,
+      "description": "Company-specific price reaction to earnings/guidance surprises; sector spill-over is small.",
+      "equity": {"default": 0.0, "sector": {}, "named_entity_shock": 0.10},
+      "rates": {"parallel_bp": 0},
+      "spreads_bp": {"IG": 5, "HY": 20},
+      "loans": {"pd_multiplier": 1.05, "sector_pd_multiplier": {}},
+      "derivatives": {"vol_shock": 0.04}
+    },
+    "PRODUCT_LAUNCH": {
+      "label": "Product launch / innovation", "scope": "targeted", "direction_from_sentiment": true,
+      "description": "Small company-specific price reaction; no credit or rates transmission.",
+      "equity": {"default": 0.0, "sector": {}, "named_entity_shock": 0.05},
+      "rates": {"parallel_bp": 0},
+      "spreads_bp": {"IG": 0, "HY": 5},
+      "loans": {"pd_multiplier": 1.0, "sector_pd_multiplier": {}},
+      "derivatives": {"vol_shock": 0.02}
+    },
+    "COMMODITY_ENERGY": {
+      "label": "Commodity / energy price shock", "scope": "broad", "direction_from_sentiment": false,
+      "description": "Energy-price spike: producers gain, energy-intensive and consumer sectors lose; inflation pushes yields up and widens HY spreads.",
+      "equity": {"default": -0.05, "sector": {"Energy": 0.12, "Materials": 0.02, "Utilities": -0.04, "Industrials": -0.08, "Consumer Discretionary": -0.12, "Consumer Staples": -0.06, "Information Technology": -0.06, "Financials": -0.04, "Health Care": -0.03, "Real Estate": -0.06, "Communication Services": -0.05}},
+      "rates": {"parallel_bp": 40},
+      "spreads_bp": {"IG": 30, "HY": 130},
+      "loans": {"pd_multiplier": 1.5, "sector_pd_multiplier": {"Energy": 0.8, "Industrials": 1.8, "Consumer Discretionary": 1.9}},
+      "derivatives": {"vol_shock": 0.09}
+    },
+    "CYBER_OPERATIONAL": {
+      "label": "Cyber / operational disruption", "scope": "targeted", "direction_from_sentiment": false,
+      "description": "Targeted loss for named firms and technology/financial peers; limited credit contagion.",
+      "equity": {"default": -0.01, "sector": {"Information Technology": -0.05, "Financials": -0.04, "Communication Services": -0.04}, "named_entity_shock": -0.15},
+      "rates": {"parallel_bp": 0},
+      "spreads_bp": {"IG": 10, "HY": 40},
+      "loans": {"pd_multiplier": 1.15, "sector_pd_multiplier": {"Information Technology": 1.4}},
+      "derivatives": {"vol_shock": 0.05}
+    },
+    "NATURAL_DISASTER": {
+      "label": "Natural disaster / health shock", "scope": "broad", "direction_from_sentiment": false,
+      "description": "Demand and supply disruption: travel, industrial and real-estate exposures hit hardest; health care cushions; yields fall.",
+      "equity": {"default": -0.09, "sector": {"Consumer Discretionary": -0.15, "Industrials": -0.12, "Energy": -0.12, "Real Estate": -0.11, "Financials": -0.10, "Health Care": 0.02, "Consumer Staples": -0.02, "Information Technology": -0.05, "Utilities": -0.03, "Materials": -0.09, "Communication Services": -0.06}},
+      "rates": {"parallel_bp": -35},
+      "spreads_bp": {"IG": 55, "HY": 250},
+      "loans": {"pd_multiplier": 2.2, "sector_pd_multiplier": {"Consumer Discretionary": 3.0, "Industrials": 2.4, "Real Estate": 2.4, "Energy": 2.0}},
+      "derivatives": {"vol_shock": 0.13}
+    },
+    "OTHER": {
+      "label": "Other / unclassified", "scope": "targeted", "direction_from_sentiment": true,
+      "description": "No explicit shock assumptions: only named entities receive a small move.",
+      "equity": {"default": 0.0, "sector": {}, "named_entity_shock": 0.02},
+      "rates": {"parallel_bp": 0},
+      "spreads_bp": {"IG": 0, "HY": 0},
+      "loans": {"pd_multiplier": 1.0, "sector_pd_multiplier": {}},
+      "derivatives": {"vol_shock": 0.0}
+    }
+  }
+}
